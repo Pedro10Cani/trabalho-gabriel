@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git e GitHub - Guia Completo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Lucida Grande', 'Bitstream Vera Sans', 'Verdana', sans-serif;
+        }
+        
+        body {
+            background-color: #f0f0f0;
+            color: #333;
+            line-height: 1.6;
+            font-size: 13px;
+        }
+        
+        /* Cabeçalho no estilo Redmine */
+        header {
+            background-color: #9d2626;
+            color: white;
+            padding: 10px 20px;
+            border-bottom: 1px solid #7a1f1f;
+        }
+        
+        header h1 {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0;
+            padding: 5px 0;
+        }
+        
+        header p {
+            font-size: 13px;
+            margin: 0;
+            opacity: 0.9;
+        }
+        
+        /* Menu de navegação estilo Redmine */
+        .main-menu {
+            background-color: #7a1f1f;
+            padding: 5px 20px;
+            border-bottom: 1px solid #5a1515;
+        }
+        
+        .main-menu ul {
+            list-style: none;
+            display: flex;
+        }
+        
+        .main-menu li {
+            margin-right: 15px;
+        }
+        
+        .main-menu a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+            display: block;
+            border-radius: 3px;
+        }
+        
+        .main-menu a:hover {
+            background-color: #9d2626;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px;
+            display: flex;
+        }
+        
+        .content {
+            flex: 1;
+            margin-right: 20px;
+        }
+        
+        .sidebar {
+            width: 280px;
+            background-color: #f8f7f7;
+            border: 1px solid #eaeaea;
+            padding: 15px;
+            border-radius: 3px;
+        }
+        
+        .sidebar h3 {
+            font-size: 14px;
+            color: #9d2626;
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .sidebar ul {
+            list-style: none;
+        }
+        
+        .sidebar li {
+            margin-bottom: 5px;
+        }
+        
+        .sidebar a {
+            color: #446;
+            text-decoration: none;
+        }
+        
+        .sidebar a:hover {
+            text-decoration: underline;
+            color: #9d2626;
+        }
+        
+        .section {
+            background-color: white;
+            border: 1px solid #eaeaea;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 3px;
+        }
+        
+        .section h2 {
+            color: #9d2626;
+            font-size: 16px;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .section p, .section ul {
+            margin-bottom: 10px;
+        }
+        
+        .section ul {
+            list-style-type: square;
+            padding-left: 20px;
+        }
+        
+        .section li {
+            margin-bottom: 5px;
+        }
+        
+        .command-list {
+            background-color: #f8f7f7;
+            border: 1px solid #eaeaea;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 3px;
+        }
+        
+        code {
+            background-color: #f5f5f5;
+            padding: 2px 4px;
+            border-radius: 2px;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #eaeaea;
+            color: #446;
+        }
+        
+        .step {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f8f7f7;
+            border-radius: 3px;
+            border-left: 3px solid #9d2626;
+        }
+        
+        .step h3 {
+            color: #9d2626;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        a {
+            color: #446;
+            text-decoration: underline;
+        }
+        
+        a:hover {
+            color: #9d2626;
+        }
+        
+        footer {
+            background-color: #9d2626;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+            font-size: 12px;
+            border-top: 1px solid #7a1f1f;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .content {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .sidebar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Git e GitHub - Guia Completo</h1>
+        <p>Entenda os conceitos, comandos e fluxos de trabalho essenciais para controle de versão</p>
+    </header>
+    
+    <nav class="main-menu">
+        <ul>
+            <li><a href="#git">O que é Git</a></li>
+            <li><a href="#github">O que é GitHub</a></li>
+            <li><a href="#diferencas">Diferenças</a></li>
+            <li><a href="#comandos">Comandos</a></li>
+            <li><a href="#tutoriais">Tutoriais</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <div class="content">
+            <section id="git" class="section">
+                <h2>O que é o Git</h2>
+                <p>Git é um sistema de controle de versão distribuído (DVCS) usado para rastrear alterações no código-fonte durante o desenvolvimento de software. Foi criado por Linus Torvalds em 2005 para o desenvolvimento do kernel Linux.</p>
+                <p>O Git permite que múltiplos desenvolvedores trabalhem no mesmo projeto simultaneamente sem interferir no trabalho uns dos outros. Ele registra o histórico de alterações e permite reverter para versões anteriores quando necessário.</p>
+            </section>
+            
+            <section id="github" class="section">
+                <h2>O que é o GitHub</h2>
+                <p>GitHub é uma plataforma de hospedagem de código-fonte baseada em Git. Ele fornece um serviço web onde os desenvolvedores podem armazenar seus projetos, colaborar com outros desenvolvedores e contribuir para projetos de código aberto.</p>
+                <p>Além do controle de versão, o GitHub oferece recursos como issue tracking, pull requests, documentação wiki e integração com diversas ferramentas de desenvolvimento.</p>
+            </section>
+            
+            <section id="diferencas" class="section">
+                <h2>Diferenças entre Git e GitHub</h2>
+                <ul>
+                    <li><strong>Git</strong> é um software de controle de versão que você instala localmente na sua máquina.</li>
+                    <li><strong>GitHub</strong> é um serviço online que hospeda repositórios Git.</li>
+                    <li>Git é a ferramenta, GitHub é a plataforma que utiliza essa ferramenta.</li>
+                    <li>Com Git você pode trabalhar offline, enquanto o GitHub requer conexão com a internet para a maioria das operações.</li>
+                    <li>Git é open source e gratuito, GitHub oferece planos gratuitos e pagos com funcionalidades adicionais.</li>
+                </ul>
+            </section>
+            
+            <section class="section">
+                <h2>Principais comandos Linux para usar o Git Bash</h2>
+                <div class="command-list">
+                    <p><code>ls</code> - Lista arquivos e diretórios</p>
+                    <p><code>cd [diretório]</code> - Muda para o diretório especificado</p>
+                    <p><code>pwd</code> - Mostra o caminho do diretório atual</p>
+                    <p><code>mkdir [nome]</code> - Cria um novo diretório</p>
+                    <p><code>rm [arquivo]</code> - Remove um arquivo</p>
+                    <p><code>rm -r [diretório]</code> - Remove um diretório e seu conteúdo</p>
+                    <p><code>cp [origem] [destino]</code> - Copia arquivos ou diretórios</p>
+                    <p><code>mv [origem] [destino]</code> - Move ou renomeia arquivos ou diretórios</p>
+                    <p><code>cat [arquivo]</code> - Exibe o conteúdo de um arquivo</p>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2>Principais comandos Git presentes no readme.md do repositório aula_git</h2>
+                <div class="command-list">
+                    <p><code>git init</code> - Inicializa um repositório Git</p>
+                    <p><code>git status</code> - Mostra o estado atual do repositório</p>
+                    <p><code>git add [arquivo]</code> - Adiciona arquivos ao staging area</p>
+                    <p><code>git commit -m "mensagem"</code> - Cria um commit com as alterações</p>
+                    <p><code>git log</code> - Mostra o histórico de commits</p>
+                    <p><code>git branch</code> - Lista, cria ou deleta branches</p>
+                    <p><code>git checkout [branch]</code> - Muda para uma branch específica</p>
+                    <p><code>git merge [branch]</code> - Mescla uma branch com a branch atual</p>
+                    <p><code>git remote add origin [url]</code> - Adiciona um repositório remoto</p>
+                    <p><code>git push -u origin main</code> - Envia commits para o repositório remoto</p>
+                    <p><code>git clone [url]</code> - Clona um repositório remoto</p>
+                </div>
+            </section>
+            
+            <section id="tutoriais" class="section">
+                <h2>Como criar um repositório no GitHub</h2>
+                <div class="step">
+                    <h3>Passo 1: Fazer login na sua conta GitHub</h3>
+                    <p>Acesse <a href="https://github.com" target="_blank">github.com</a> e faça login na sua conta.</p>
+                </div>
+                
+                <div class="step">
+                    <h3>Passo 2: Clicar no botão "New"</h3>
+                    <p>No canto superior direito da página, clique no botão "+" e selecione "New repository".</p>
+                </div>
+                
+                <div class="step">
+                    <h3>Passo 3: Preencher as informações do repositório</h3>
+                    <p>Digite um nome para o repositório, uma descrição (opcional) e escolha se será público ou privado.</p>
+                </div>
+                
+                <div class="step">
+                    <h3>Passo 4: Inicializar com um README (opcional)</h3>
+                    <p>Marque a opção "Initialize this repository with a README" se quiser começar com um arquivo README.md.</p>
+                </div>
+                
+                <div class="step">
+                    <h3>Passo 5: Criar o repositório</h3>
+                    <p>Clique no botão "Create repository" para finalizar a criação.</p>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2>Como ligar um projeto existente na máquina</h2>
+                <div class="step">
+                    <h3>Passo 1: Inicializar o Git no projeto</h3>
+                    <p>No terminal, navegue até a pasta do projeto e execute: <code>git init</code></p>
+                </div>
+                
+                <div class="step">
+                    <h3>Passo 2: Adicionar o repositório remoto</h3>
+                    <p>Execute: <code>git remote add origin [URL_DO_SEU_REPOSITORIO]</code></p>
+                </div>
+                
+                <div class="step">
+                    <h3>Passo 3: Verificar o remote</h3>
+                    <p>Execute: <code>git remote -v</code> para confirmar que o repositório remoto foi adicionado corretamente.</p>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2>Como gerar uma versão com Git</h2>
+                <div class="step">
+                    <h3>Passo 1: Adicionar arquivos ao staging</h3>
+                    <p>Execute: <code>git add .</code> para adicionar todos os arquivos modificados, ou <code>git add [arquivo]</code> para arquivos específicos.</p>
+                </div>
+                
+                <div class="step">
+                    <h3>Passo 2: Fazer commit das alterações</h3>
+                    <p>Execute: <code>git commit -m "Mensagem descritiva do commit"</code></p>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2>Como enviar da máquina para o GitHub</h2>
+                <div class="step">
+                    <h3>Passo 1: Fazer commit das alterações</h3>
+                    <p>Certifique-se de que todas as alterações foram commitadas (veja a seção anterior).</p>
+                </div>
+                
+                <div class="step">
+                    <h3>Passo 2: Enviar para o repositório remoto</h3>
+                    <p>Execute: <code>git push origin main</code> (ou "master" dependendo do nome da sua branch principal)</p>
+                </div>
+                
+                <div class="step">
+                    <h3>Passo 3: Verificar no GitHub</h3>
+                    <p>Acesse seu repositório no GitHub para confirmar que as alterações foram enviadas com sucesso.</p>
+                </div>
+            </section>
+        </div>
+        
+        <div class="sidebar">
+            <h3>Navegação Rápida</h3>
+            <ul>
+                <li><a href="#git">O que é Git</a></li>
+                <li><a href="#github">O que é GitHub</a></li>
+                <li><a href="#diferencas">Diferenças entre Git e GitHub</a></li>
+                <li><a href="#comandos">Comandos Linux e Git</a></li>
+                <li><a href="#tutoriais">Tutoriais Práticos</a></li>
+            </ul>
+            
+            <h3>Links Úteis</h3>
+            <ul>
+                <li><a href="https://git-scm.com/doc" target="_blank">Documentação Oficial do Git</a></li>
+                <li><a href="https://guides.github.com/" target="_blank">Guias do GitHub</a></li>
+                <li><a href="https://github.com/caixetovisk/aula_git" target="_blank">Repositório Aula Git</a></li>
+            </ul>
+            
+            <h3>Recursos Adicionais</h3>
+            <ul>
+                <li><a href="#">Git Cheat Sheet</a></li>
+                <li><a href="#">Fluxo de Trabalho com Git</a></li>
+                <li><a href="#">Resolução de Conflitos</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Desenvolvido por Pedro Henrique Klipp Cani - 1°info</p>
+    </footer>
+</body>
+</html>
